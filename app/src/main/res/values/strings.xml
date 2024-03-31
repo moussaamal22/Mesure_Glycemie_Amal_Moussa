@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Moussa_Amal_Mesure_Glycemie</string>
+    <string name="text">Mesure de niveau de glycémie</string>
+    <string name="age">Votre âge :</string>
+    <string name="question">Est-ce que vous jeûnez ?</string>
+</resources>
+
+

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:background="@drawable/app_background"
+    tools:context=".MainActivity">
+    <!-- Définition des espaces de noms XML pour les attributs Android, les attributs personnalisés  et les outils de développement -->
+    <!-- Spécification de la largeur et de la hauteur du LinearLayout pour qu'elles occupent toute la taille de son parent -->
+    <!-- Les vues enfants du LinearLayout seront disposées verticalement -->
+    <!-- Ajout de 20dp de padding autour du LinearLayout -->
+    <!-- Définition de l'arrière-plan du LinearLayout avec une ressource drawable nommée "app_background" -->
+    <!-- Définition de l'arrière-plan du LinearLayout avec une ressource drawable nommée "app_background" -->
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/playfair_display"
+        android:gravity="center"
+        android:padding="30dp"
+        android:text="@string/text"
+        android:textColor="@color/red"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        />
+    <!-- Définition de l'identifiant unique de l'élément TextView -->
+    <!-- Définition de la largeur de l'élément TextView pour qu'elle corresponde à celle de son parent -->
+    <!-- Définition de la hauteur de l'élément TextView pour qu'elle s'ajuste automatiquement à la hauteur du contenu du texte -->
+    <!-- Attribution de la police de caractères "Playfair Display" pour le texte affiché -->
+    <!-- Alignement horizontal du texte au centre de l'élément TextView -->
+    <!-- Ajout de 30dp de padding autour du TextView pour créer un espace uniforme entre le texte et les bords de l'élément -->
+    <!-- Attribution du texte à afficher dans l'élément TextView à partir de la ressource de chaîne définie dans le fichier strings.xml -->
+    <!-- Définition de la couleur du texte pour qu'elle corresponde à la couleur définie dans le fichier colors.xml -->
+    <!-- Définition de la taille du texte à 25sp -->
+    <!-- Application du style en gras au texte -->
+
+    <TextView
+        android:id="@+id/tvAge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/age"
+        android:layout_marginTop="40dp"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        />
+
+    <SeekBar
+        android:id="@+id/sbAge"
+        android:max="120"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    <!--android:max: Spécifie la valeur maximale que l'utilisateur peut sélectionner sur la barre de progression.
+    Dans ce cas, la valeur maximale est définie à 120.
+    android:layout_marginTop: Ajoute une marge de 20dp au-dessus du SeekBar.-->
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/line_shape"
+        />
+
+    <TextView
+        android:id="@+id/question"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/question"
+        android:layout_marginTop="40dp"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
+        <RadioButton
+            android:id="@+id/rbtOui"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:checked="true"
+            android:text="Oui"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+        <RadioButton
+            android:id="@+id/rbtNon"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:checked="false"
+            android:text="Non"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+    </RadioGroup>
+    <!-- android:layout_width et android:layout_height : Définissent la largeur et la hauteur du RadioGroup.
+    Dans ce cas, la largeur est définie pour remplir entièrement celle de son parent (match_parent),
+    et la hauteur est configurée pour s'adapter à la taille du contenu (wrap_content).-->
+    <!-- android:orientation="horizontal" : Spécifie l'orientation des boutons radio à l'intérieur du groupe.
+    les boutons radio seront disposés horizontalement.-->
+
+    <EditText
+        android:id="@+id/etValue"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Valeur mesurée (en mmol/l):"
+        android:inputType="numberDecimal"
+        android:textSize="25sp"
+        />
+
+    <Button
+        android:id="@+id/btnConsulter"
+        android:layout_marginTop="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CONSULTER"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        />
+
+    <TextView
+        android:id="@+id/tvReponse"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:lineSpacingExtra="8sp"
+        android:padding="20dp"
+        android:text="..."
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
+
+</LinearLayout>
+
