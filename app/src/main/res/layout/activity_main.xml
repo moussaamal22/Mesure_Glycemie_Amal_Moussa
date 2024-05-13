@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:padding="20dp"
     android:background="@drawable/app_background"
-    tools:context=".MainActivity">
+    tools:context=".view.MainActivity">
     <!-- Définition des espaces de noms XML pour les attributs Android, les attributs personnalisés  et les outils de développement -->
     <!-- Spécification de la largeur et de la hauteur du LinearLayout pour qu'elles occupent toute la taille de son parent -->
     <!-- Les vues enfants du LinearLayout seront disposées verticalement -->
@@ -127,19 +127,6 @@
         android:textSize="18sp"
         />
 
-    <TextView
-        android:id="@+id/tvReponse"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:lineSpacingExtra="8sp"
-        android:padding="20dp"
-        android:text="..."
-        android:textColor="@color/black"
-        android:textSize="25sp"
-        android:textStyle="bold" />
 
 
 </LinearLayout>

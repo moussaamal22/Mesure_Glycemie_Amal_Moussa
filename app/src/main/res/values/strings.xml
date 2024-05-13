@@ -3,6 +3,9 @@
     <string name="text">Mesure de niveau de glycémie</string>
     <string name="age">Votre âge :</string>
     <string name="question">Est-ce que vous jeûnez ?</string>
+    <string name="email">email :</string>
+    <string name="mdp">mot de passe :</string>
+    <string name="consultation">Consultation</string>
 </resources>
 
 

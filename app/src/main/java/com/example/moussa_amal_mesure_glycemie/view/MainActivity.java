@@ -1,8 +1,10 @@
-package com.example.moussa_amal_mesure_glycemie;
+package com.example.moussa_amal_mesure_glycemie.view;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,13 +15,21 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.moussa_amal_mesure_glycemie.R;
+import com.example.moussa_amal_mesure_glycemie.controller.Controller;
+
 public class MainActivity extends AppCompatActivity {
     //declaration des variables
-    private TextView tvAge,tvReponse;
+    private TextView tvAge; //tvReponse -> Consult
     private SeekBar sbAge;
     private RadioButton rbtOui,rbtNon;
     private Button btnConsulter;
     private EditText etValue;
+
+    private Controller controller;
+
+    private final String RESPONSE_KEY = "reponse"; //constante pour sauvegarder la clé 
+    private final int REQUEST_CODE=1; //code de l'activité ConsultActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) { //Cette méthode est appelée lorsque l'activité est créée pour la première fois.
@@ -31,10 +41,7 @@ public class MainActivity extends AppCompatActivity {
             @SuppressLint("SetTextI18n")
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                Log.i("Information", "onProgressChanged "+progress);
-                // affichage dans le Log de Android studio pour voir les changements détectés sur le SeekBar (message sur le console)
-                // tvAge.setText("Votre âge : "+ progress);
-                // Mise à jour du TextView par la valeur : progress à chaque changement
+                tvAge.setText("Votre age: "+ progress);
             }
 
             @Override
@@ -47,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
         btnConsulter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int age;
+                float valeur;
                 Log.i("Information", "button cliqué");
                 boolean verifAge = false, verifValeur = false;
                 if(sbAge.getProgress()!=0)
@@ -60,58 +69,39 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "Veuillez saisir votre valeur mesurée !", Toast.LENGTH_LONG).show();
                 if(verifAge && verifValeur)
                 {
-                    calculer();
+                    age = sbAge.getProgress();
+                    valeur=Float.valueOf(etValue.getText().toString());
+                    //uer view cont
+                    controller.createPatient(age, valeur, rbtOui.isChecked());
+                    //Flèche "Notify" Conttoller-->View
+                    //tvReponse.setText(controller.getResult());
+
+                    Intent intent = new Intent(MainActivity.this,ConsultActivity.class);
+                    intent.putExtra(RESPONSE_KEY,controller.getResult());
+                    startActivityForResult(intent,REQUEST_CODE);
                 }
         }
     });
 }
-    public void calculer()
-    {
-        int age = Integer.valueOf(sbAge.getProgress());
-        float valeurMesuree = Float.valueOf(etValue.getText().toString());
-        boolean isFasting = rbtOui.isChecked();
-        if(isFasting) {
-            if (age >= 13) {
-                if (valeurMesuree < 5.0)
-                    tvReponse.setText("Niveau de glycémie est trop bas");
-                else if (valeurMesuree >= 5.0 && valeurMesuree <= 7.2)
-                    tvReponse.setText("Niveau de glycémie est normale");
-                else
-                    tvReponse.setText("Niveau de glycémie est trop élevé");
-            } else if (age >= 6 && age <= 12) {
-                if (valeurMesuree < 5.0)
-                    tvReponse.setText("Niveau de glycémie est trop bas");
-                else if (valeurMesuree >= 5.0 && valeurMesuree <= 10.0)
-                    tvReponse.setText("Niveau de glycémie est normale");
-                else
-                    tvReponse.setText("Niveau de glycémie est trop élevé");
-            } else if (age < 6) {
-                if (valeurMesuree < 5.5)
-                    tvReponse.setText("Niveau de glycémie est trop bas");
-                else if (valeurMesuree >= 5.5 && valeurMesuree <= 10.0)
-                    tvReponse.setText("Niveau de glycémie est normale");
-
-                else
-                    tvReponse.setText("Niveau de glycémie est trop élevé");
-            }
-        } else {
-            if (valeurMesuree > 10.5)
-                tvReponse.setText("Niveau de glycémie est trop élevé");
-            else
-                tvReponse.setText("Niveau de glycémie est normale");
-        }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) { //suivi de retour
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == REQUEST_CODE)
+            if(resultCode==RESULT_CANCELED)
+                Toast.makeText(getApplicationContext(),"Erreur ConsultActivity : RESULT_CANCELED", Toast.LENGTH_LONG).show();
     }
     private void init() //Cette méthode initialise les objets de l'interface utilisateur en récupérant
                         // les références des composants définis dans le fichier de mise en page XML.
     {
+        controller = Controller.getInstance();
+
         tvAge = findViewById(R.id.tvAge);
-        tvReponse = findViewById(R.id.tvReponse);
+
         sbAge = findViewById(R.id.sbAge);
         rbtOui = findViewById(R.id.rbtOui);
         rbtNon = findViewById(R.id.rbtNon);
         btnConsulter = findViewById(R.id.btnConsulter);
         etValue = findViewById(R.id.etValue);
     }
-
 }
 
